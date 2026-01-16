@@ -508,7 +508,7 @@
             }, 750);
         } else {
             wrongAnswers++;
-            feedback.textContent = `✗ Falsch! Die richtige Antwort ist: ${currentAnswer}`;
+            feedback.textContent = `✗ Falsch! Die richtige Antwort ist: ${normalizeString(currentAnswer)}`;
             feedback.classList.add('show', 'wrong');
 
             setTimeout(() => {
