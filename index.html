@@ -534,10 +534,12 @@
     // Normalisiere String
     function normalizeString(str) {
         return str.toLowerCase()
+            .replace(/_/g, ' ') // Unterstriche in Leerzeichen
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
             .trim();
     }
+
 
     // Event Listeners
     document.getElementById('startBtn').addEventListener('click', startQuiz);
