@@ -207,6 +207,7 @@ let wrongAnswers = 0;
 let currentAnswer = '';
 
 let sperre = false;
+let waitingForEnter = false;
 
 // Lade Flaggen
 function loadFlags() {
@@ -286,11 +287,7 @@ function checkAnswer() {
         feedback.textContent = `✗ Falsch! Die richtige Antwort ist: ${normalizeStringSol(currentAnswer)}`;
         feedback.classList.add('show', 'wrong');
 
-
-        setTimeout(() => {
-            currentIndex++;
-            showQuestion();
-        }, 3000);
+        waitingForEnter = true;
     }
 }
 
@@ -332,10 +329,18 @@ document.getElementById('submitBtn').addEventListener('click', checkAnswer);
 document.getElementById('restartBtn').addEventListener('click', restartQuiz);
 
 document.getElementById('answerInput').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
+    if (e.key !== 'Enter') return;
+
+    if (waitingForEnter) {
+        waitingForEnter = false;
+        sperre = false;
+        currentIndex++;
+        showQuestion();
+    } else {
         checkAnswer();
     }
 });
+
 
 // Lade Flaggen beim Start
 loadFlags();
