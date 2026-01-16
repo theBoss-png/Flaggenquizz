@@ -240,10 +240,20 @@ function startQuiz() {
     showScreen('quizScreen');
     showQuestion();
 }
+function preloadNextFlags(count = 3) {
+    for (let i = 1; i <= count; i++) {
+        const index = currentIndex + i;
+        if (index >= flags.length) break;
+
+        const img = new Image();
+        img.src = flags[index].url;
+    }
+}
 
 // Zeige Frage
 function showQuestion() {
     sperre = false;
+
     if (currentIndex >= flags.length) {
         showResults();
         return;
@@ -252,8 +262,13 @@ function showQuestion() {
     const current = flags[currentIndex];
     currentAnswer = current.name;
 
-    document.getElementById('flagImage').src = current.url;
-    document.getElementById('progress').textContent = `Flagge ${currentIndex + 1} von ${flags.length}`;
+    const img = document.getElementById('flagImage');
+    img.src = current.url;
+
+    preloadNextFlags(3); // 👈 wichtig
+
+    document.getElementById('progress').textContent =
+        `Flagge ${currentIndex + 1} von ${flags.length}`;
 
     document.getElementById('answerInput').value = '';
     document.getElementById('answerInput').focus();
@@ -261,6 +276,7 @@ function showQuestion() {
     const feedback = document.getElementById('feedback');
     feedback.classList.remove('show', 'correct', 'wrong');
 }
+
 
 // Prüfe Antwort
 function checkAnswer() {
