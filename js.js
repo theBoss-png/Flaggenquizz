@@ -172,7 +172,7 @@ const flagFileNames = [
     "Syrien.png",
     "Tadschikistan.png",
     "Thailand.png",
-    "Timor-Leste.png",
+    "Osttimor.png",
     "Togo.png",
     "Tonga.png",
     "Trinidad_und_Tobago.png",
