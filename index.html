@@ -438,7 +438,7 @@
     // Lade Flaggen
     function loadFlags() {
         flags = flagFileNames.map(fileName => ({
-            url: '/assets/' + fileName,
+            url: 'assets/' + fileName, // <-- kein führendes /
             name: fileName.replace(/\.(png|jpg|jpeg|gif|svg)$/i, '')
         }));
 
